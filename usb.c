@@ -41,9 +41,8 @@ static void input_thread(void *arg)
 	IOHIDDeviceRegisterInputReportCallback(t->usb.dev,
 		t->usb.inbuf, 64, input_callback, t);
 	while (1) {
-		int r;
 		if (t->online == 0) break;
-		r = CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, true);
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1, true);
 	}
 	t->input_thread_quit = 1;
 	printf("input_thread end\n");
@@ -55,7 +54,6 @@ static void output_thread(void *arg)
 	struct timeval tv;
 	struct timespec ts;
 	uint8_t buf[64];
-	int r;
 
 	printf("output_thread begin\n");
 	while (1) {
@@ -75,7 +73,7 @@ static void output_thread(void *arg)
 				ts.tv_sec = tv.tv_sec;
 				ts.tv_nsec = tv.tv_usec*1000;
 				ts.tv_sec += 1;
-				r = pthread_cond_timedwait(&t->output_event,
+				pthread_cond_timedwait(&t->output_event,
 					&t->output_mutex, &ts);
 				t->output_thread_waiting = 0;
 				//printf("output_thread, r: %d, errno: %d\n", r, errno);

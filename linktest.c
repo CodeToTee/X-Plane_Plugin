@@ -41,8 +41,9 @@ void XPLMGetWindowGeometry(XPLMWindowID inWindowID,
 }
 void XPLMDrawTranslucentDarkBox(int inLeft, int inTop, int inRight, int inBottom) {
 }
-void XPLMDrawString(float *inColorRGB, int inXOffset, int inYOffset, char *inChar,    
-	int *inWordWrapWidth, XPLMFontID inFontID) {
+void XPLMDrawString(float *inColorRGB, int inXOffset, int inYOffset, const char *inChar,
+							 int *inWordWrapWidth, XPLMFontID inFontID)
+{
 }
 void XPLMRegisterFlightLoopCallback(XPLMFlightLoop_f inFlightLoop, float inInterval,
 	void *inRefcon) {

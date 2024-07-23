@@ -1,8 +1,8 @@
 # This makefile has been modified to accept
 # external environment variables
 
-OS ?= LINUX
-#OS = MACOSX
+#OS ?= LINUX
+OS = MACOSX
 #OS = WINDOWS
 #OS = WINDOWS64
 
@@ -20,10 +20,9 @@ LIBS += -ludev -lpthread -lrt
 TARGET ?= lin.xpl
 
 else ifeq ($(OS), MACOSX)
-CC ?= gcc-4.2
-SDK ?= /Developer/SDKs/MacOSX10.5.sdk
-#ARCH = -arch i386 -mmacosx-version-min=10.5
-ARCH ?= -arch i386 -arch x86_64 -mmacosx-version-min=10.5
+CC ?= clang
+SDK ?= $(shell xcrun --sdk macosx --show-sdk-path)
+ARCH ?= -arch arm64 -arch x86_64 -mmacosx-version-min=11.0
 INC += -ISDK/CHeaders/XPLM
 CFLAGS += -Wall -O2 $(ARCH) -D$(OS) -isysroot $(SDK) $(INC) -fvisibility=hidden
 LDFLAGS += $(ARCH) -isysroot $(SDK)
